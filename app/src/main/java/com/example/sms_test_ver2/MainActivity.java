@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         UserReadSMS();
         Intent intent = getIntent();
         String str = intent.getStringExtra("string");
-        textView.setText(str);
+        println(str);
     }
 
     public void UserfindViewid(){
@@ -70,13 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 callPermissionCheck(MY_PERMISSIONS_REQUEST_READ_SMS);
             }
         });
+        btPermission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPermissionCheck(MY_PERMISSIONS_REQUEST_RECEIVE_SMS);
+                callPermissionCheck(MY_PERMISSIONS_REQUEST_SEND_SMS);
+               // callPermissionCheck(MY_PERMISSIONS_REQUEST_READ_SMS);
+            }
+        });
 
     }
 
     public void UserSendSMS(){
         phoneNo = editphone.getText().toString();
         message = editsms.getText().toString();
-
 
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
 
         String str = intent.getStringExtra("string");
-        textView.setText(str);
+        println(str);
         super.onNewIntent(intent);
 
     }
@@ -152,10 +159,10 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "SMS RECEIVE 권한 허용됨.",Toast.LENGTH_LONG).show();
-                    textView.setText("SMS RECEIVE 권한 허용됨.");
+                    println("SMS RECEIVE 권한 허용됨.");
                 } else {
                     Toast.makeText(getApplicationContext(),"SMS RECEIVE 권한 없음.", Toast.LENGTH_LONG).show();
-                    textView.setText("SMS RECEIVE 권한 없음.");
+                    println("SMS RECEIVE 권한 없음.");
                     return;
                 }
             }
@@ -163,10 +170,10 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "SMS 전송 권한 허용됨.",Toast.LENGTH_LONG).show();
-                    textView.setText("SMS 전송 권한 허용됨.");
+                    println("SMS 전송 권한 허용됨.");
                 } else {
                     Toast.makeText(getApplicationContext(),"SMS 전송 권한 없음.", Toast.LENGTH_LONG).show();
-                    textView.setText("SMS 전송 권한 없음.");
+                    println("SMS 전송 권한 없음.");
                     return;
                 }
             }
@@ -174,16 +181,18 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "SMS 읽기 권한 허용됨.",Toast.LENGTH_LONG).show();
-                    textView.setText("SMS 읽기 권한 허용됨.");
+                    println("SMS 읽기 권한 허용됨.");
                 } else {
                     Toast.makeText(getApplicationContext(),"SMS 읽기 권한 없음.", Toast.LENGTH_LONG).show();
-                    textView.setText("SMS 읽기 권한 없음.");
+                    println("SMS 읽기 권한 없음.");
                     return;
                 }
             }
-
-
         }
+    }
+
+    public void println(String data){
+        textView.append(data + "\n");
     }
 
 

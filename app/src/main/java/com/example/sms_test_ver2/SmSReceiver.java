@@ -29,12 +29,11 @@ public class SmSReceiver extends BroadcastReceiver {
             String sender = messages[0].getOriginatingAddress();
             String contents = messages[0].getMessageBody().toString();
             Date receivedDate = new Date(messages[0].getTimestampMillis());
-            /*
-            Log.d(TAG, "sender: " + sender);
-            Log.d(TAG, "contents: " + contents);
-            Log.d(TAG, "received date: " + receivedDate);
 
-             */
+            Log.d(this.getClass().getName(), "sender: " + sender);
+            Log.d(this.getClass().getName(), "contents: " + contents);
+            Log.d(this.getClass().getName(), "received date: " + receivedDate);
+
             Toast.makeText(context, "broad send Sms " + sender + " : " + contents, Toast.LENGTH_LONG).show();
             sendToActivity(context, sender+"from broad");
         }
