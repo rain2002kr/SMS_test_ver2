@@ -28,22 +28,32 @@ public class SmSReceiver extends BroadcastReceiver {
         if (messages.length > 0) {
             String sender = messages[0].getOriginatingAddress();
             String contents = messages[0].getMessageBody().toString();
-            Date receivedDate = new Date(messages[0].getTimestampMillis());
+            Date receivedDate = new Date( messages[0].getTimestampMillis() );
 
-            Log.d(this.getClass().getName(), "sender: " + sender);
-            Log.d(this.getClass().getName(), "contents: " + contents);
-            Log.d(this.getClass().getName(), "received date: " + receivedDate);
+            Log.d( this.getClass().getName(), "sender: " + sender );
+            Log.d( this.getClass().getName(), "contents: " + contents );
+            Log.d( this.getClass().getName(), "received date: " + receivedDate );
 
-            Toast.makeText(context, "broad send Sms " + sender + " : " + contents, Toast.LENGTH_LONG).show();
-            sendToActivity(context, sender+"from broad");
+            Toast.makeText( context, "broad send Sms " + sender + " : " + contents, Toast.LENGTH_LONG ).show();
+            String[] regitSender = {"15888700", "15881688", "6505551212"};
+
+            for(int i = 0; i < regitSender.length ; i++) {
+                if (regitSender[i].equals( sender )) {
+                    sendToActivity( context, sender, contents, format.format( receivedDate ) + " from broadCast" );
+                }
+            }
+
         }
 
     }
 
-    private void sendToActivity(Context context, String str){
+    private void sendToActivity(Context context, String sender, String contents, String receivedDate){
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("string", str);
+        intent.putExtra("sender", sender);
+        intent.putExtra("contents", contents);
+        intent.putExtra("receivedDate", receivedDate );
+
         context.startActivity(intent);
     }
 

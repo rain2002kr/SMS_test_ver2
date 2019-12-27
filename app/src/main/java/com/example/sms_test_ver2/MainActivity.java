@@ -20,10 +20,11 @@ public class MainActivity extends AppCompatActivity {
     EditText editphone,editsms;
     TextView textView;
     String phoneNo,message;
+    String sender, contents, receivedDate;
     private static final int MY_PERMISSIONS_REQUEST_RECEIVE_SMS =1 ;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =2 ;
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS =3 ;
-
+    SmsManager smsManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
         UserPermission();
         UserSendSMS();
         UserReadSMS();
-        Intent intent = getIntent();
-        String str = intent.getStringExtra("string");
-        println(str);
+        UserSendSmSfromBroadCast();
+
     }
 
     public void UserfindViewid(){
@@ -88,8 +88,9 @@ public class MainActivity extends AppCompatActivity {
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SmsManager smsManager = SmsManager.getDefault();
+                smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, message, null, null);
+
             }
         });
 
@@ -98,12 +99,31 @@ public class MainActivity extends AppCompatActivity {
      ;
 
     }
+    public void UserSendSmSfromBroadCast(){
+        String telNo = "01056874135";
+        Intent intent = getIntent();
+        sender = intent.getStringExtra("sender");
+        contents = intent.getStringExtra("contents");
+        receivedDate = intent.getStringExtra("receivedDate");
+        smsManager.sendTextMessage(telNo, null, contents, null, null);
+
+        println(sender );
+        println(contents);
+        println(receivedDate);
+
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
+        String telNo = "01056874135";
+        sender = intent.getStringExtra("sender");
+        contents = intent.getStringExtra("contents");
+        receivedDate = intent.getStringExtra("receivedDate");
+        smsManager.sendTextMessage(telNo, null, contents, null, null);
 
-        String str = intent.getStringExtra("string");
-        println(str);
+        println(sender );
+        println(contents);
+        println(receivedDate);
         super.onNewIntent(intent);
 
     }
