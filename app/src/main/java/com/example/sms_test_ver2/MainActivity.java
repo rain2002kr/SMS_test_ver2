@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_RECEIVE_SMS =1 ;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =2 ;
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS =3 ;
-    SmsManager smsManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                smsManager = SmsManager.getDefault();
+                SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, message, null, null);
 
             }
@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         sender = intent.getStringExtra("sender");
         contents = intent.getStringExtra("contents");
         receivedDate = intent.getStringExtra("receivedDate");
-        smsManager.sendTextMessage(telNo, null, contents, null, null);
+       // SmsManager smsManager = SmsManager.getDefault();
+      //  smsManager.sendTextMessage(telNo, null, contents, null, null);
 
         println(sender );
         println(contents);
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         sender = intent.getStringExtra("sender");
         contents = intent.getStringExtra("contents");
         receivedDate = intent.getStringExtra("receivedDate");
+        SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(telNo, null, contents, null, null);
 
         println(sender );
