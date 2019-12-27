@@ -106,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
         sender = intent.getStringExtra("sender");
         contents = intent.getStringExtra("contents");
         receivedDate = intent.getStringExtra("receivedDate");
-       // SmsManager smsManager = SmsManager.getDefault();
-      //  smsManager.sendTextMessage(telNo, null, contents, null, null);
 
         println(sender );
         println(contents);
