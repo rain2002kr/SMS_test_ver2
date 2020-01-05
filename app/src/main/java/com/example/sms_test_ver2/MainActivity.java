@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        String telNo = "01021064135";
+        String telNo = "01056874135";
         sender = intent.getStringExtra("sender");
         contents = intent.getStringExtra("contents");
         receivedDate = intent.getStringExtra("receivedDate");

@@ -32,7 +32,7 @@ public class SmSReceiver extends BroadcastReceiver {
                 Log.d(this.getClass().getName(), "contents: " + contents);
                 Log.d(this.getClass().getName(), "received date: " + receivedDate);
 
-                String[] regitSender = {"15888700", "15881688", "6505551212", "01046973907"};
+                String[] regitSender = {"15888700", "15881688"};
 
                 for(int i = 0; i < regitSender.length ; i++) {
                     if (regitSender[i].equals(sender)) {
