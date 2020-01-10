@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button btStart,btStop,btPermission,btSend,btPerRecv,btPerSend,btPerRead;
+    Button btStart,btStop,btPermission,btSend,btPerRecv,btPerSend,btPerRead,btVersion;
     EditText editphone,editsms;
     TextView textView;
     String phoneNo,message;
@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_RECEIVE_SMS =1 ;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =2 ;
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS =3 ;
-
+    private static final String CurVersion = "1.0.2";
+    private static final String update = "20.01.10";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
         btPermission =(Button) findViewById(R.id.btPermission);
         btPerRecv =(Button) findViewById(R.id.btPerRecv);
         btPerSend =(Button) findViewById(R.id.btPerSend);
-        btPerRead =(Button) findViewById(R.id.btPerRead);
+        btVersion =(Button) findViewById(R.id.btVersion);
 
-        btStart =(Button) findViewById(R.id.btStart);
-        btStop =(Button) findViewById(R.id.btStop);
         btSend =(Button) findViewById(R.id.btSend);
         editphone =(EditText) findViewById(R.id.editphone);
         editsms =(EditText) findViewById(R.id.editsms);
@@ -64,32 +63,27 @@ public class MainActivity extends AppCompatActivity {
                 callPermissionCheck(MY_PERMISSIONS_REQUEST_SEND_SMS);
             }
         });
-        btPerRead.setOnClickListener(new View.OnClickListener() {
+        btVersion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callPermissionCheck(MY_PERMISSIONS_REQUEST_READ_SMS);
-            }
-        });
-        btPermission.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callPermissionCheck(MY_PERMISSIONS_REQUEST_RECEIVE_SMS);
-                callPermissionCheck(MY_PERMISSIONS_REQUEST_SEND_SMS);
-               // callPermissionCheck(MY_PERMISSIONS_REQUEST_READ_SMS);
+                println("Current Version : "+ CurVersion +" Date :" + update);
             }
         });
 
     }
 
     public void UserSendSMS(){
-        phoneNo = editphone.getText().toString();
-        message = editsms.getText().toString();
+
 
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                phoneNo = editphone.getText().toString();
+                message = editsms.getText().toString();
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, message, null, null);
+                println("전송번호 : "+ phoneNo );
+                println("내용 :" +message);
 
             }
         });
@@ -107,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
         contents = intent.getStringExtra("contents");
         receivedDate = intent.getStringExtra("receivedDate");
 
-        println(sender );
-        println(contents);
-        println(receivedDate);
+        println("받은번호 : "+ sender );
+        println("내용 :" +contents);
+        println("전송번호 : "+ telNo);
+        println("전송시간 : " +receivedDate);
 
     }
 
@@ -122,9 +117,11 @@ public class MainActivity extends AppCompatActivity {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(telNo, null, contents, null, null);
 
-        println(sender );
-        println(contents);
-        println(receivedDate);
+        println("받은번호 : "+ sender );
+        println("내용 :" +contents);
+        println("전송번호 : "+ telNo);
+        println("전송시간 : " +receivedDate);
+
         super.onNewIntent(intent);
 
     }

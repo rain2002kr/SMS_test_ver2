@@ -35,7 +35,7 @@ public class SmSReceiver extends BroadcastReceiver {
             Log.d( this.getClass().getName(), "received date: " + receivedDate );
 
             Toast.makeText( context, "broad send Sms " + sender + " : " + contents, Toast.LENGTH_LONG ).show();
-            String[] regitSender = {"15888700", "15881688", "6505551212"};
+            String[] regitSender = {"15888700", "15881688", "15888900", "6505551212"};
 
             for(int i = 0; i < regitSender.length ; i++) {
                 if (regitSender[i].equals( sender )) {
